@@ -21,6 +21,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@okta/okta-react": "0.0.12",
+    "@okta/okta-signin-widget": "^2.6.0",
     "axios": "^0.15.3",
     "body-parser": "^1.16.1",
     "compression": "^1.7.1",
@@ -42,6 +44,7 @@
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.2.0",
     "sequelize": "^4.3.1",
+    "smartsheet": "^1.0.4",
     "socket.io": "^2.0.3"
   },
   "devDependencies": {

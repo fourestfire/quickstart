@@ -24,6 +24,7 @@ export default function (state = initialState, action) {
 import axios from 'axios';
 
 export const receiveCampuses = () => dispatch => {
+  console.log('trying to get campuses')
   axios.get('/api/campuses/')
   .then(res => res.data)
   .then(campuses => dispatch(receiveCampusesSync(campuses)))

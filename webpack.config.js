@@ -7,6 +7,10 @@ module.exports = {
     path: __dirname,
     filename: './public/bundle.js'
   },
+  node: {
+    fs: "empty",
+    request: "empty"
+  },
   devtool: 'source-map',
   module: {
     rules: [

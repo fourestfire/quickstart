@@ -11,12 +11,12 @@ class Home extends React.Component {
   render () {
     return (
       <div>
-        <p> Tipping Point Events List </p>
+        <p> things that are going on </p>
           <p>
             {
               this.props.campuses.allCampuses.map(campus => {
-                return (<li key={campus.id}>Campus {campus.id}:&nbsp;&nbsp;
-                  <Link to={`/campuses/${campus.id}`}>{campus.name}</Link>
+                return (<li key={campus.id}>Place {campus.id}:&nbsp;&nbsp;
+                  {campus.name}
                   </li>)
               })
             }
@@ -29,9 +29,10 @@ class Home extends React.Component {
 /* -------------------<   CONTAINER   >-------------------- */
 
 import { connect } from 'react-redux';
-import { receiveCampuses } from '../store/campus.jsx';
+import { receiveCampuses } from '../store/campus';
 
 const mapState = ({ campuses }) => ({ campuses });
 const mapDispatch = ({ receiveCampuses });
 
 export default connect(mapState, mapDispatch)(Home);
+

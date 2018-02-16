@@ -22,6 +22,7 @@ router.param('campusId', function(req, res, next, id) {
 });
 
 router.get('/', function(req, res, next) {
+  // console.log(req, res, next, "wowowowget")
   Campus.findAll()
   .then(data => res.json(data))
   .catch(next);
