@@ -5,6 +5,7 @@
  */
 export {default as Main} from './main'
 export {default as UserHome} from './user-home'
+export {default as Home} from './home'
 export {default as Campus} from './campus'
 export {default as Loading} from './loading'
 export {default as Okta} from './okta'
