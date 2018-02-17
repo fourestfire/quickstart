@@ -4,6 +4,7 @@ import OktaSignIn from '@okta/okta-signin-widget';
 
 export default class OktaSignInWidget extends Component {
   componentDidMount() {
+    console.log('this.props',this.props)
     const el = ReactDOM.findDOMNode(this);
     this.widget = new OktaSignIn({
       baseUrl: this.props.baseUrl,
@@ -35,7 +36,13 @@ export default class OktaSignInWidget extends Component {
         {type: 'GOOGLE', id: '$Your_GOOGLE_IDP_ID_Here'}
       ]
     });
-    this.widget.renderEl({el}, this.props.onSuccess, this.props.onError);
+    this.widget.renderEl({el}, this.onSuccess.bind(this, this.props.onSuccess), this.props.onError);
+  }
+
+  onSuccess(fn, res){
+    var args = [].slice.call(arguments);
+    console.log('user details', args[1].user.profile)
+    // fn(res);
   }
 
   componentWillUnmount() {
@@ -46,3 +53,12 @@ export default class OktaSignInWidget extends Component {
     return <div />;
   }
 }
+
+/*
+onsuccess res ƒ onSuccess(res) {
+  return this.props.auth.redirect({
+    sessionToken: res.session.token
+  });
+}
+
+*/

@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import {OktaNav} from './'
 
 class Home extends React.Component {
+  componentDidMount() {
+    console.log('props',this.props)
+  }
   render () {
     return (
       <div>
