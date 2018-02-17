@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import OktaSignIn from '@okta/okta-signin-widget';
-// import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
-// import '@okta/okta-signin-widget/dist/css/okta-theme.css';
 
 export default class OktaSignInWidget extends Component {
   componentDidMount() {
@@ -20,4 +18,4 @@ export default class OktaSignInWidget extends Component {
   render() {
     return <div />;
   }
-};
+}

@@ -2,7 +2,10 @@ const LiveReloadPlugin = require('webpack-livereload-plugin')
 const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
-  entry: './client/index.js',
+  entry: {
+    app: ['./client/index.js'],
+    polyfills: ['babel-polyfill'],
+  },
   output: {
     path: __dirname,
     filename: './public/bundle.js'

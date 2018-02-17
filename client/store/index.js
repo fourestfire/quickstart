@@ -3,10 +3,9 @@ import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import user from './user'
-import students from './student';
 import campuses from './campus';
 
-const reducer = combineReducers({user, students, campuses})
+const reducer = combineReducers({user, campuses})
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
   createLogger({collapsed: true})

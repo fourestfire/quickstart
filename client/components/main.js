@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
 import { receiveCampuses } from '../store/campus';
+import { withAuth } from '@okta/okta-react';
 
 /**
  * COMPONENT
@@ -63,5 +64,3 @@ const mapDispatch = (dispatch) => {
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Main))
-
-

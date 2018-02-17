@@ -1,15 +1,19 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Route, Switch, Router} from 'react-router-dom'
+// import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, Campus, UserHome} from './components'
+import {Main, Signup, Campus, UserHome, OktaNav, OktaLogin, Protected} from './components'
 import {me} from './store'
 import { receiveCampuses } from './store/campus';
 
-/**
- * COMPONENT
- */
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Security, SecureRoute, ImplicitCallback } from '@okta/okta-react';
+
+function onAuthRequired({history}) {
+  history.push('/login');
+}
+
 class Routes extends Component {
   componentDidMount () {
     this.props.loadInitialData()
@@ -19,26 +23,18 @@ class Routes extends Component {
     const {isLoggedIn} = this.props
 
     return (
-      <Router history={history}>
-        <Main>
-          <Switch>
-            {/* Routes placed here are available to all visitors */}
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/campus" component={Campus} />
-            {
-              isLoggedIn &&
-                <Switch>
-                  {/* Routes placed here are only available after logging in */}
-                  <Route path="/home" component={UserHome} />
-                </Switch>
-            }
-            {/* Displays our Login component as a fallback */}
-            <Route component={Login} />
-          </Switch>
-        </Main>
+      <Router>
+        <Security issuer='https://dev-870179.oktapreview.com/oauth2/default'
+                  client_id='0oae1z17dvF0tdWhU0h7'
+                  redirect_uri={window.location.origin + '/implicit/callback'}
+                  onAuthRequired={onAuthRequired} >
+          <Route path='/' exact={true} component={OktaNav} />
+          <SecureRoute path='/protected' component={Protected} />
+          <Route path='/login' render={() => <OktaLogin baseUrl='https://dev-870179.oktapreview.com' />} />
+          <Route path='/implicit/callback' component={ImplicitCallback} />
+        </Security>
       </Router>
-    )
+    );
   }
 }
 
