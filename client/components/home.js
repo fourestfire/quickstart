@@ -4,11 +4,6 @@ import { Link } from 'react-router-dom';
 import {OktaNav} from './'
 
 class Home extends React.Component {
-
-  componentDidMount () {
-    this.props.receiveCampuses();
-  }
-
   render () {
     return (
       <div>

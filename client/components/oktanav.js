@@ -41,7 +41,7 @@ export default withAuth(class Home extends Component {
       ) : (
       <ul className="navbar-nav mr-auto">
         <li className="nav-item active">
-          <Link to='/about' className="nav-link">Public</Link>
+          <Link to='/about' className="nav-link">Public Facing Link</Link>
         </li>
       </ul>)
 

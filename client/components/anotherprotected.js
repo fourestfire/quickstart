@@ -18,7 +18,7 @@ class AnotherProtected extends React.Component {
           <div className="row">
             <div className="col-md-8 blog-main">
               <div className="blog-post">
-                <h2 className="blog-post-title"> Another set of protected things </h2>
+                <h2 className="blog-post-title"> Another list of protected data </h2>
                 <p>
                   {
                     this.props.campuses.allCampuses.map(campus => {

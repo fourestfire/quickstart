@@ -4,7 +4,6 @@ const isDev = process.env.NODE_ENV === 'development'
 module.exports = {
   entry: {
     app: ['./client/index.js'],
-    polyfills: ['babel-polyfill'],
   },
   output: {
     path: __dirname,
