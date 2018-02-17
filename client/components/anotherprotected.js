@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {OktaNav} from './'
 
-class Protected extends React.Component {
+class AnotherProtected extends React.Component {
 
   componentDidMount () {
     this.props.receiveCampuses();
@@ -18,7 +18,7 @@ class Protected extends React.Component {
           <div className="row">
             <div className="col-md-8 blog-main">
               <div className="blog-post">
-                <h2 className="blog-post-title"> Here is some protected data </h2>
+                <h2 className="blog-post-title"> Another set of protected things </h2>
                 <p>
                   {
                     this.props.campuses.allCampuses.map(campus => {
@@ -29,7 +29,7 @@ class Protected extends React.Component {
                   }
                 </p>
                 <hr />
-                <p>Enamel pin gastropub lo-fi, typewriter helvetica echo park shoreditch franzen pitchfork eiusmod tempor pabst mlkshk tofu. Semiotics bitters chia brooklyn distillery <a href="#">dis parturient montes</a> stumptown cray tofu williamsburg keytar. In plaid actually succulents, disrupt ugh subway tile chillwave.</p>
+                <p>Microdosing pariatur single-origin coffee, freegan woke humblebrag mlkshk sed cloud bread quis. +1 deep v mlkshk shoreditch, art party craft beer intelligentsia health goth ennui godard non plaid.</p>
               </div>
             </div>
           </div>
@@ -47,5 +47,5 @@ import { receiveCampuses } from '../store/campus';
 const mapState = ({ campuses }) => ({ campuses });
 const mapDispatch = ({ receiveCampuses });
 
-export default connect(mapState, mapDispatch)(Protected);
+export default connect(mapState, mapDispatch)(AnotherProtected);
 

@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 // import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Signup, Campus, UserHome, OktaNav, OktaLogin, Protected, Home} from './components'
+import {Signup, About, Campus, UserHome, OktaNav, OktaLogin, Protected, AnotherProtected, Home} from './components'
 import {me} from './store'
 import { receiveCampuses } from './store/campus';
 
@@ -29,7 +29,9 @@ class Routes extends Component {
                   redirect_uri={window.location.origin + '/implicit/callback'}
                   onAuthRequired={onAuthRequired} >
           <Route path='/' exact={true} component={Home} />
+          <Route path='/about' component={About} />
           <SecureRoute path='/protected' component={Protected} />
+          <SecureRoute path='/anotherprotected' component={AnotherProtected} />
           <Route path='/login' render={() => <OktaLogin baseUrl='https://dev-870179.oktapreview.com' />} />
           <Route path='/implicit/callback' component={ImplicitCallback} />
         </Security>
