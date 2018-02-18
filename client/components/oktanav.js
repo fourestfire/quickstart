@@ -27,7 +27,7 @@ class OktaNav extends Component {
     if (this.state.authenticated === null) return null;
 
     const okta = this.state.authenticated ?
-      <button onClick={this.props.auth.logout} className="btn btn-secondary" type="button">Logout</button> :
+      <button onClick={this.props.auth.logout} className="btn btn-secondary" type="button">Logout {this.props.user.login}</button> :
       <button onClick={this.props.auth.login} className="btn btn-secondary" type="button">Login / Signup</button>;
 
     const links = this.state.authenticated ? (

@@ -54,7 +54,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
-      dispatch(me())
+      // dispatch(me()) // not needed right now with okta setup
       dispatch(receiveCampuses())
     }
   }
