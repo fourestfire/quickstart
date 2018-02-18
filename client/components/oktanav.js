@@ -2,12 +2,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '@okta/okta-react';
+import history from '../history';
 
 class OktaNav extends Component {
   constructor(props) {
     super(props);
     this.state = { authenticated: null };
     this.checkAuthentication = this.checkAuthentication.bind(this);
+    this.logout = this.logout.bind(this);
     this.checkAuthentication();
   }
 
@@ -22,12 +24,18 @@ class OktaNav extends Component {
     this.checkAuthentication();
   }
 
+  logout(){
+    console.log('trying to log out');
+    this.props.auth.logout();
+    window.location.reload();
+  }
+
   render() {
     console.log('props', this.props)
     if (this.state.authenticated === null) return null;
 
     const okta = this.state.authenticated ?
-      <button onClick={this.props.auth.logout} className="btn btn-secondary" type="button">Logout {this.props.user.login}</button> :
+      <button onClick={this.logout} className="btn btn-secondary" type="button">Logout {this.props.user.login}</button> :
       <button onClick={this.props.auth.login} className="btn btn-secondary" type="button">Login / Signup</button>;
 
     const links = this.state.authenticated ? (
