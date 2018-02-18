@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '@okta/okta-react';
 
-export default withAuth(class Home extends Component {
+class OktaNav extends Component {
   constructor(props) {
     super(props);
     this.state = { authenticated: null };
@@ -23,6 +23,7 @@ export default withAuth(class Home extends Component {
   }
 
   render() {
+    console.log('props', this.props)
     if (this.state.authenticated === null) return null;
 
     const okta = this.state.authenticated ?
@@ -63,4 +64,12 @@ export default withAuth(class Home extends Component {
       </div>
     );
   }
-});
+}
+
+/* -------------------<   CONTAINER   >-------------------- */
+import { connect } from 'react-redux';
+
+const mapState = ({ user }) => ({ user });
+const mapDispatch = null;
+
+export default withAuth(connect(mapState, mapDispatch)(OktaNav))

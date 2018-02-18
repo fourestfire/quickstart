@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import OktaSignIn from '@okta/okta-signin-widget';
 
-export default class OktaSignInWidget extends Component {
+class OktaSignInWidget extends Component {
   componentDidMount() {
-    console.log('this.props',this.props)
     const el = ReactDOM.findDOMNode(this);
     this.widget = new OktaSignIn({
       baseUrl: this.props.baseUrl,
@@ -39,10 +38,11 @@ export default class OktaSignInWidget extends Component {
     this.widget.renderEl({el}, this.onSuccess.bind(this, this.props.onSuccess), this.props.onError);
   }
 
-  onSuccess(fn, res){
+  onSuccess(fn, res){ // wrapper function so we can do something with the user details we get back
     var args = [].slice.call(arguments);
     console.log('user details', args[1].user.profile)
-    // fn(res);
+    this.props.login(args[1].user.profile); // sends user details to store
+    fn(res); // actually runs the original success function
   }
 
   componentWillUnmount() {
@@ -50,15 +50,16 @@ export default class OktaSignInWidget extends Component {
   }
 
   render() {
+    console.log('props', this.props)
     return <div />;
   }
 }
 
-/*
-onsuccess res ƒ onSuccess(res) {
-  return this.props.auth.redirect({
-    sessionToken: res.session.token
-  });
-}
+/* -------------------<   CONTAINER   >-------------------- */
+import { connect } from 'react-redux';
+import { login } from '../store/user';
 
-*/
+const mapState = null;
+const mapDispatch = ({ login });
+
+export default connect(mapState, mapDispatch)(OktaSignInWidget)

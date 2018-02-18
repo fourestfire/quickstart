@@ -5,6 +5,7 @@ import history from '../history'
  * ACTION TYPES
  */
 const GET_USER = 'GET_USER'
+const SET_USER = 'SET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 
 /**
@@ -16,6 +17,7 @@ const defaultUser = {}
  * ACTION CREATORS
  */
 const getUser = user => ({type: GET_USER, user})
+const setUser = user => ({type: SET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
 
 /**
@@ -39,6 +41,11 @@ export const auth = (email, password, method) =>
       })
       .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr))
 
+export const login = (user) =>
+  dispatch =>
+    dispatch(setUser(user))
+    console.log('setting user')
+
 export const logout = () =>
   dispatch =>
     axios.post('/auth/logout')
@@ -54,6 +61,8 @@ export const logout = () =>
 export default function (state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
+      return action.user
+    case SET_USER:
       return action.user
     case REMOVE_USER:
       return defaultUser

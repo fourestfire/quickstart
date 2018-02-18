@@ -5,7 +5,7 @@ import {OktaNav} from './'
 
 class Home extends React.Component {
   componentDidMount() {
-    console.log('props',this.props)
+    console.log('props',this.props, 'store', this.store)
   }
   render () {
     return (
