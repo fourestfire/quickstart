@@ -41,7 +41,7 @@ class OktaSignInWidget extends Component {
   onSuccess(fn, res){ // wrapper function so we can do something with the user details we get back
     var args = [].slice.call(arguments);
     console.log('user details', args[1].user.profile)
-    this.props.login(args[1].user.profile); // sends user details to store
+    // this.props.login(args[1].user.profile); // sends user details to store
     fn(res); // actually runs the original success function
   }
 

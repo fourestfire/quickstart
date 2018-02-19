@@ -2,11 +2,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {OktaNav} from './'
+import { withAuth } from '@okta/okta-react';
 
 class Home extends React.Component {
   componentDidMount() {
     console.log('props',this.props, 'store', this.store)
   }
+
   render () {
     return (
       <div>
@@ -46,5 +48,5 @@ import { receiveCampuses } from '../store/campus';
 const mapState = ({ campuses }) => ({ campuses });
 const mapDispatch = ({ receiveCampuses });
 
-export default connect(mapState, mapDispatch)(Home);
+export default withAuth(connect(mapState, mapDispatch)(Home));
 

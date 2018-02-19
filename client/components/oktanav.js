@@ -2,29 +2,61 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from '@okta/okta-react';
-import history from '../history';
 
 class OktaNav extends Component {
   constructor(props) {
     super(props);
     this.state = { authenticated: null };
     this.checkAuthentication = this.checkAuthentication.bind(this);
+    this.getUser = this.getUser.bind(this);
+    this.getIdToken = this.getIdToken.bind(this);
+    this.setUser = this.setUser.bind(this);
+    this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.checkAuthentication();
   }
 
   async checkAuthentication() {
+    console.log('authenticating');
     const authenticated = await this.props.auth.isAuthenticated();
     if (authenticated !== this.state.authenticated) {
       this.setState({ authenticated });
     }
+
+    if (authenticated) {
+      this.setUser(this.login);
+    }
   }
 
-  componentDidUpdate() {
-    this.checkAuthentication();
+  setUser(loginFn) {
+    Promise.all([this.getUser(), this.getIdToken()])
+    .then(function(values) {
+      loginFn({details: values[0], id: values[1]})
+    })
   }
 
-  logout(){
+  async getUser() {
+    const user = await this.props.auth.getUser();
+    return user;
+  }
+  async getIdToken() {
+    const id = await this.props.auth.getIdToken();
+    return id;
+  }
+
+  componentDidMount() {
+    // console.log('this.props.user.id', this.props.user.id)
+  }
+
+  // componentDidUpdate() { // currently, reenabling this will run setUser infinitely
+  //   this.checkAuthentication();
+  // }
+
+  login(userInfo) {
+    this.props.login(userInfo);
+  }
+
+  logout() {
     console.log('trying to log out');
     this.props.auth.logout();
     window.location.reload();
@@ -35,7 +67,7 @@ class OktaNav extends Component {
     if (this.state.authenticated === null) return null;
 
     const okta = this.state.authenticated ?
-      <button onClick={this.logout} className="btn btn-secondary" type="button">Logout {this.props.user.login}</button> :
+      <button onClick={this.logout} className="btn btn-secondary" type="button">Logout {this.props.user.details ? this.props.user.details.email : null}</button> :
       <button onClick={this.props.auth.login} className="btn btn-secondary" type="button">Login / Signup</button>;
 
     const links = this.state.authenticated ? (
@@ -76,8 +108,9 @@ class OktaNav extends Component {
 
 /* -------------------<   CONTAINER   >-------------------- */
 import { connect } from 'react-redux';
+import { login } from '../store/user';
 
 const mapState = ({ user }) => ({ user });
-const mapDispatch = null;
+const mapDispatch = ({ login });
 
 export default withAuth(connect(mapState, mapDispatch)(OktaNav))
